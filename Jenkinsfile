@@ -18,18 +18,18 @@ pipeline {
                 sh 'mvn test'
             }
         }
-        stage('JaCoCo') {
-            steps {
-                echo 'Code Coverage'
-                jacoco()
+        stage('Publish Test Coverage Report') {
+         steps {
+           step([$class: 'JacocoPublisher', 
+                execPattern: '**/build/jacoco/*.exec',
+                classPattern: '**/build/classes',
+                sourcePattern: 'src/main/java',
+                exclusionPattern: 'src/test*'
+                ])
             }
         }
         
-        stage('Deploy') {
-            steps {
-                echo '## TODO DEPLOYMENT ##'
-            }
-        }
+        
     }
     
     post {
