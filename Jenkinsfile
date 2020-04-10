@@ -21,10 +21,10 @@ pipeline {
         stage('Publish Test Coverage Report') {
          steps {
            step([$class: 'JacocoPublisher', 
-                execPattern: '**/build/jacoco/*.exec',
-                classPattern: '**/build/classes',
-                sourcePattern: 'src/main/java',
-                exclusionPattern: 'src/test*'
+                execPattern: '**/**.exec',
+                classPattern: '**/classes',
+                sourcePattern: '**/src/main/java'
+                
                 ])
             }
         }
