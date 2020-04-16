@@ -27,8 +27,8 @@ pipeline {
         stage('Sonar') {
             steps {
                 echo 'Sonar Scanner'
-               	//def scannerHome = tool 'SonarQube Scanner 3.0'
-			    withSonarQubeEnv('sonars_scanner6') {
+               	def scannerHome = tool 'onars_scanner6'
+			    withSonarQubeEnv('scannerHome') {
 			    	sh '/home/sureshconfi12345/scanners/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
 			    }
             }
