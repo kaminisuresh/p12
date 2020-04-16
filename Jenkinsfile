@@ -31,18 +31,13 @@ pipeline {
            
         sonarscanner1= tool 'sonars_scanner6'  
         withSonarQubeEnv('sonars_scanner6'){
-          sh "${sonarscanner1}/bin/sonar-scanner.sh --debug -Dsonar.projectName=$JOB_NAME -Dsonar.projectKey=$JOB_NAME -Dsonar.projectVersion=1.0.0 -Dsonar.modules=gameoflife-core,gameoflife-web -Dgameoflife-core.sonar.java.binaries=target/classes -Dgameoflife-web.sonar.java.binaries=target/classes -Dgameoflife-core.sonar.sources=src/main -Dgameoflife-web.sonar.sources=src/main -Dgameoflife-core.sonar.tests=src/test -Dgameoflife-web.sonar.tests=src/test -Dgameoflife-core.sonar.junit.reportsPath=/target/surefire-reports -Dgameoflife-web.sonar.junit.reportsPath=/target/surefire-reports -Dgameoflife-core.sonar.jacoco.reportPath=target/jacoco.exec -Dgameoflife-web.sonar.jacoco.reportPath=target/jacoco.exec -Dsonar.language=java -Dsonar.sourceEncoding=UTF-8 "  
+          sh "${sonarscanner1}/bin/sonar-scanner.sh --debug -Dsonar.projectName=$JOB_NAME -Dsonar.projectKey=$JOB_NAME -Dsonar.projectVersion=1.0.0 -Dsonar.sources=src/main -Dsonar.java.binaries=target/classes -Dsonar.tests=src/test -Dsonar.junit.reportsPath=/target/surefire-reports -Dsonar.junit.reportsPath=/target/surefire-reports -Dsonar.jacoco.reportPath=target/jacoco.exec -Dsonar.jacoco.reportPath=target/jacoco.exec -Dsonar.language=java -Dsonar.sourceEncoding=UTF-8 "  
         }
 		}
 		    
             }
         }
-        stage('Package') {
-            steps {
-                echo 'Packaging'
-                sh 'mvn package -DskipTests'
-            }
-        }
+        
         stage('Deploy') {
             steps {
                 echo '## TODO DEPLOYMENT ##'
