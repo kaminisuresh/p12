@@ -27,10 +27,14 @@ pipeline {
         stage('Sonar') {
             steps {
                 echo 'Sonar Scanner'
-               	scannerHome1 = tool 'sonars_scanner6'
-			    withSonarQubeEnv('sonars_scanner6') {
-			    	sh '/home/sureshconfi12345/scanners/sonar-scanner-4.2.0.1873-linux/bin/sonar-scanner'
-			    }
+               	script{
+           
+        sonarscanner1= tool 'sonars_scanner6'  
+        withSonarQubeEnv('sonars_scanner6'){
+          sh "${sonarscanner1}/bin/sonar-scanner.sh --debug -Dsonar.projectName=$JOB_NAME -Dsonar.projectKey=$JOB_NAME -Dsonar.projectVersion=1.0.0 -Dsonar.modules=gameoflife-core,gameoflife-web -Dgameoflife-core.sonar.java.binaries=target/classes -Dgameoflife-web.sonar.java.binaries=target/classes -Dgameoflife-core.sonar.sources=src/main -Dgameoflife-web.sonar.sources=src/main -Dgameoflife-core.sonar.tests=src/test -Dgameoflife-web.sonar.tests=src/test -Dgameoflife-core.sonar.junit.reportsPath=/target/surefire-reports -Dgameoflife-web.sonar.junit.reportsPath=/target/surefire-reports -Dgameoflife-core.sonar.jacoco.reportPath=target/jacoco.exec -Dgameoflife-web.sonar.jacoco.reportPath=target/jacoco.exec -Dsonar.language=java -Dsonar.sourceEncoding=UTF-8 "  
+        }
+		}
+		    
             }
         }
         stage('Package') {
